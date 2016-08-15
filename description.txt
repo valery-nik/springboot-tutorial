@@ -1,0 +1,25 @@
+boot2docker - легковесный дистрибьютив линукса для запуска докер контейнеров. Запусается из под виртуалбокса.
+
+https://hub.docker.com/ - реестр докер-образов (хранилище docker образов)
+docker info -
+docker images - все доступные докер-образы
+docker ps - просмотр активных контейнеров
+docker run -d -P seqvence/static-site - запускает контейнер из образа seqvence/static-site
+
+docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+docker run --name <имя контейнера> -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+docker run -p 8082:8080 -t iozol/springboot - запускаем контейнер и его порт 8080 пробрасываем на 8082 порт хоста,
+т.е. http://192.168.99.100:8082/persons
+
+
+Dockerfile - файл, содержащий спецификацию операций о копопнент для создания(сборки) образа
+docker build -t <имя_репозитория/имя_образа> <путь_к_папке_докер_файла> - сборка докер образа
+Пример: docker build -t iozol/springboot .
+
+docker-machine ls
+docker-machine env default
+
+Ссылки:
+https://github.com/cer/microservices-examples/blob/master/docker-compose.yml
+http://xgu.ru/wiki/Docker - wiki на русском
+https://habrahabr.ru/post/253877/ - описание run
