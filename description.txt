@@ -4,22 +4,110 @@ https://hub.docker.com/ - реестр докер-образов (хранили
 docker info -
 docker images - все доступные докер-образы
 docker ps - просмотр активных контейнеров
-docker run -d -P seqvence/static-site - запускает контейнер из образа seqvence/static-site
 
+https://habrahabr.ru/post/253877/ - как работает ocker run
+docker run - стартует котейнер из заданого образа. Образ сначала ищется в локальном, а потом в гловбальном реестре.
+docker run -d -P seqvence/static-site - запускает контейнер из образа seqvence/static-site
 docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
 docker run --name <имя контейнера> -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
 docker run -p 8082:8080 -t iozol/springboot - запускаем контейнер и его порт 8080 пробрасываем на 8082 порт хоста,
 т.е. http://192.168.99.100:8082/persons
 
 
-Dockerfile - файл, содержащий спецификацию операций о копопнент для создания(сборки) образа
+Термины (http://www.javaworld.com/article/3000781/development-tools/open-source-java-projects-docker.html)
+Docker engine -
+Docker image - Этот образ говорит docker-у, что находится в контейнере, какой процесс запустить, когда запускается контейнер
+ и другие конфигурационные данные. Docker образ доступен только для чтения.
+Dockerfile - текстовый файл, содержащий команды(инструкции) для создания(сборки) образа.
+    типы команд в докерфайле:
+        запуск команды
+        добавление файла или директории
+        создание переменной окружения
+        указания, что запускать когда запускается контейнер этого образа
+
 docker build -t <имя_репозитория/имя_образа> <путь_к_папке_докер_файла> - сборка докер образа
-Пример: docker build -t iozol/springboot .
+Пример: docker build -t iozol/springboot . // . - текущая папка
+Docker container - запущенный экземпляр докер-имеджа и состоит из из операционной системы, пользовательских файлов и метаданных.
+
+
+docker run -it --rm python:3.4
+Параметры -it запускают контейнер в интерактивном режиме и привязывает ее к консоли для взаимодействия.
+Параметр --rm удалит текущий контейнер после выхода.
+
+docker run -it --rm python:3.4 ls - когда контейнер запустится, будет тут же выполнена команда ls, которая
+покажет все файлы и фильтры в главной директории.
+
 
 docker-machine ls
 docker-machine env default
 
 Ссылки:
+http://www.javaworld.com/article/3000781/development-tools/open-source-java-projects-docker.html?page=2
+https://www.youtube.com/watch?v=-CayzT_x-aY
+http://www.netpatch.ru/research/docker/2014/03.24-linux-docker-practical-guide.html
+https://ivan.bessarabov.ru/blog/docker-commands - Работа с контейнерами !!!
+https://github.com/javaee-samples/docker-java/blob/master/chapters/docker-compose.adoc
+https://github.com/saada/docker-compose-php-mysql/blob/master/docker-compose.yml
+https://docs.docker.com/compose/wordpress/
+https://github.com/cer/microservices-examples/blob/master/docker-compose.yml
+http://stackoverflow.com/questions/30330442/how-to-ssh-into-docker-machine-virualbox-instance - коннект с докер хостом по ssh
+https://habrahabr.ru/post/247629/#comment_8219229 - комментарий про слои в докер-имеджам и запуск котейнера в интерактивном режиме.
+http://sysadm.ru/linux/virtual/docker/basics/basic-commands/
+https://xakep.ru/2015/06/01/docker-usage/
+https://habrahabr.ru/post/267441/
+https://habrahabr.ru/post/272145/
+https://ast.rocks/blog/docker-create-container
+https://www.youtube.com/watch?v=-O9ArkgkorA
+https://toster.ru/q/22512
+https://github.com/jiwhiz/spring-boot-docker-mysql
+https://ejf.io/dev_blog/mysql-java-docker/
+https://blog.amartynov.ru/docker-mysql/
+http://wiki.russianfedora.pro/index.php?title=Docker
+https://habrahabr.ru/post/253877/
+https://spring.io/guides/gs/spring-boot-docker/
+http://www.3pillarglobal.com/insights/building-a-microservice-architecture-with-spring-boot-and-docker-part-iii
+https://habrahabr.ru/company/infobox/blog/240623/
+https://xakep.ru/2015/06/04/docker-faq/
 https://github.com/cer/microservices-examples/blob/master/docker-compose.yml
 http://xgu.ru/wiki/Docker - wiki на русском
 https://habrahabr.ru/post/253877/ - описание run
+https://blog.pavelsklenar.com/5-useful-docker-tip-and-tricks-on-windows/ - как нужно подключить volume на windows
+
+Чеклист для деплоя микросеврисов:
+- создаем мавен мультимодульный проект
+- в родильском pom прописываем версию докер плагина для билда образов. (не забываем!!! - https://github.com/spotify/docker-maven-plugin/issues/177)
+- в дочерних pom'ах делаем его настройку для билд фазы.
+
+1 - Создаем для каждого запускаемого java артифакта свой докерфайл: /<микросервис_N>/docker/Dockerfile
+    (для постоения докер имеджа мик.сервиса)
+2 - Создаем docker-compose.yml, который развернет все микросервисы из заданных имеждей.
+3 Запускаем Docker quickstart terminal (windows) и работаем через него: docker <имя команды>
+
+4 - docker-machine ls - покажет список активных докер хостов (обычно один).
+  - docker images - все доступные докер-образы
+  - docker ps - просмотр активных контейнеров
+  - docker run [-параметры] [--name имя_контейнера] [имя_реестра/имя_образа] [команда]
+  - docker stop <имя_контейнера>
+  - docker restart
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -63,7 +63,7 @@ hs_err_pid*
 .mvn/
 description.txt
 docker-compose.yml
-docker-dir/
+service1/docker-dir/
 mvnw
 mvnw.cmd
 out/
