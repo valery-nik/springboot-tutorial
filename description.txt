@@ -19,17 +19,19 @@ Swarm
 
 
 
-docker info -
+docker info - вывод информации о докер хосте
 docker images - все доступные докер-образы
 docker ps - просмотр активных контейнеров
 
-https://habrahabr.ru/post/253877/ - как работает ocker run
+https://habrahabr.ru/post/253877/ - как работает docker run
 docker run - стартует котейнер из заданого образа. Образ сначала ищется в локальном, а потом в гловбальном реестре.
 docker run -d -P seqvence/static-site - запускает контейнер из образа seqvence/static-site
 docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
 docker run --name <имя контейнера> -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
 docker run -p 8082:8080 -t iozol/springboot - запускаем контейнер и его порт 8080 пробрасываем на 8082 порт хоста,
 т.е. http://192.168.99.100:8082/persons
+
+docker run -p IP:HOST_PORT:CONTAINER_PORT
 
 
 Термины (http://www.javaworld.com/article/3000781/development-tools/open-source-java-projects-docker.html)
@@ -44,13 +46,14 @@ Dockerfile - текстовый файл, содержащий команды(и
         указания, что запускать когда запускается контейнер этого образа
 
 docker build -t <имя_репозитория/имя_образа> <путь_к_папке_докер_файла> - сборка докер образа
-Пример: docker build -t iozol/springboot . // . - текущая папка
+Пример: docker build -t iozol/springboot .  --где "." - текущая папка
 Docker container - запущенный экземпляр докер-имеджа и состоит из из операционной системы, пользовательских файлов и метаданных.
 
 
 docker run -it --rm python:3.4
 Параметры -it запускают контейнер в интерактивном режиме и привязывает ее к консоли для взаимодействия.
-Параметр --rm удалит текущий контейнер после выхода.
+Параметр --rm после выхода завершения работы контейнер самоудалится.
+Параметр -d -конетейнер будет работать в фоновом режиме
 
 docker run -it --rm python:3.4 ls - когда контейнер запустится, будет тут же выполнена команда ls, которая
 покажет все файлы и фильтры в главной директории.
@@ -115,10 +118,27 @@ https://habrahabr.ru/company/infobox/blog/263001/ - алгоритм работ�
   - docker restart
 
 
+https://habrahabr.ru/company/infopulse/blog/237737/ - отличная статья!!!!
+https://habrahabr.ru/post/272145/
+http://containertutorials.com/docker-compose/nginx-flask-postgresql.html
+http://containertutorials.com/docker-compose/nginx-flask-postgresql.html
+https://github.com/bytecode-mike/docker-b00t
+https://github.com/jiwhiz/spring-boot-docker-mysql !!!!
+http://affy.blogspot.ru/2015/04/running-spring-boot-inside-docker.html
 
+# удаление всех незапущенных контейнеров
+docker rm $(docker ps -q -f status=exited) - (http://stackoverflow.com/questions/17236796/how-to-remove-old-docker-containers)
 
+# удалить просроченные образы и ненужные слои
+docker rmi $(docker images -q -f dangling=true) -(https://blog.amartynov.ru/docker-mysql/)
 
+-p IP:HOST_PORT:CONTAINER_PORT - ордеринг проброса портов
 
+# запуск команды mysql на запущенном контейнере mysql_cont
+docker exec -i mysql_cont mysql -uroot -p123456  <<< "use myapp; show tables; select 'время =', now();"
+
+# старт контейнера с БД и заданными параметрами окружения
+docker run --name mysql -p 192.168.99.100:3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER=iozol -e MYSQL_PASSWORD=123456 -e MYSQL_DATABASE=myapp -d mysql:5.7
 
 
 
