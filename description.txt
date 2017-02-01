@@ -125,6 +125,7 @@ http://containertutorials.com/docker-compose/nginx-flask-postgresql.html
 https://github.com/bytecode-mike/docker-b00t
 https://github.com/jiwhiz/spring-boot-docker-mysql !!!!
 http://affy.blogspot.ru/2015/04/running-spring-boot-inside-docker.html
+https://github.com/cer/microservices-examples - хороший пример spring boot, spring cloud + docker
 
 # удаление всех незапущенных контейнеров
 docker rm $(docker ps -q -f status=exited) - (http://stackoverflow.com/questions/17236796/how-to-remove-old-docker-containers)
