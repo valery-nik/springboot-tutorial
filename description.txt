@@ -133,7 +133,12 @@ docker rm $(docker ps -q -f status=exited) - (http://stackoverflow.com/questions
 # удалить просроченные образы и ненужные слои
 docker rmi $(docker images -q -f dangling=true) -(https://blog.amartynov.ru/docker-mysql/)
 
--p IP:HOST_PORT:CONTAINER_PORT - ордеринг проброса портов
+# ордеринг проброса портов
+-p IP:HOST_PORT:CONTAINER_PORT - docker run -p 9999:27018 (https://image.slidesharecdn.com/dockerrelateiq-presentation-131020185517-phpapp01/95/docker-relateiq-presentation-9-638.jpg?cb=1382295374)
+
+# монтирование внешних папок (volum)
+docker run -i -t --rm -v /host-volume:/container-volume IMAGE_NAME bash
+docker run -d -P --name web -v /src/webapp:/webapp training/webapp python app.py 
 
 # запуск команды mysql на запущенном контейнере mysql_cont
 docker exec -i mysql_cont mysql -uroot -p123456  <<< "use myapp; show tables; select 'время =', now();"
