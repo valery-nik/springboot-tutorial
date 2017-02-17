@@ -141,7 +141,8 @@ docker exec -i mysql_cont mysql -uroot -p123456  <<< "use myapp; show tables; se
 # старт контейнера с БД и заданными параметрами окружения
 docker run --name mysql -p 192.168.99.100:3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER=iozol -e MYSQL_PASSWORD=123456 -e MYSQL_DATABASE=myapp -d mysql:5.7
 
-
+# запуск самуничтожающегося контейнера в интерактивном режиме
+docker run -i -t --rm private/mysql bash #Попробуйте команду top или which mysqld. Для выхода — exit.
 
 
 
