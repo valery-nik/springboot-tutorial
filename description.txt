@@ -149,13 +149,7 @@ docker run --name mysql -p 192.168.99.100:3306:3306 -e MYSQL_ROOT_PASSWORD=12345
 # запуск самуничтожающегося контейнера в интерактивном режиме
 docker run -i -t --rm private/mysql bash #Попробуйте команду top или which mysqld. Для выхода — exit.
 
-
-
-
-
-
-
-
+docker run -p 3306:3306 --name sem_mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=sem -v mysql-data:/var/lib/mysql -d mysql:5.7
 
 
 
