@@ -99,6 +99,7 @@ https://habrahabr.ru/post/277699/#comment_8780813 - коммент про Docker
 http://blog.arungupta.me/docker-machine-swarm-compose-couchbase-wildfly/
 http://wiki.russianfedora.pro/index.php?title=Docker#Docker-engine
 https://habrahabr.ru/company/infobox/blog/263001/ - алгоритм работы с Docker Compose
+https://toster.ru/q/200627 - Как правильно использовать Docker для веб разработки?
 
 Чеклист для деплоя микросеврисов:
 - создаем мавен мультимодульный проект
