@@ -104,17 +104,38 @@ https://toster.ru/q/200627 - Как правильно использовать 
 Чеклист для деплоя микросеврисов:
 - создаем мавен мультимодульный проект
 - в родительском pom прописываем версию докер плагина для билда образов. (не забываем прописать в винде данные переменные окружения!!! - https://github.com/spotify/docker-maven-plugin/issues/177)
+  docker.image.prefix - можно юзать название семейства артифактов (например jdocker, sem)  
+             <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.14</version>
+                <configuration>
+                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin> 
 - в дочерних pom'ах делаем его настройку для билд фазы.
 
 1 - Создаем для каждого запускаемого java артифакта свой докерфайл: /<микросервис_N>/docker/Dockerfile
     (для постоения докер имеджа мик.сервиса)
 2 - Создаем docker-compose.yml, который развернет все микросервисы из заданных имеждей.
-3 Запускаем Docker quickstart terminal (windows) и работаем через него: docker <имя команды>
+3 - Запускаем Docker quickstart terminal (windows) и работаем через него: docker <имя_команды> или docker-compose
 
-4 - docker-machine ls - покажет список активных докер хостов и их IP (обычно один).
+4 Список основных команд терминала:
+  - docker-compose up
+  - docker-compose build
+  - docker-machine ls - покажет список активных докер хостов и их IP (обычно один).
   - docker images - все доступные докер-образы
   - docker ps - просмотр активных контейнеров
-  - docker run [-параметры] [--name имя_контейнера] [имя_реестра/имя_образа] [команда]
+  - docker run [-параметры] [--name имя_контейнера] [имя_реестра/имя_образа] [команда] - создание + старт контейнера
+  - docker start <имя_контейнера> - старт контейнера
   - docker stop <имя_контейнера>
   - docker restart
 
