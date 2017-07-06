@@ -179,7 +179,11 @@ docker run -i -t --rm private/mysql bash #Попробуйте команду to
 docker run -p 3306:3306 --name sem_mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=sem -v mysql-data:/var/lib/mysql -d mysql:5.7
 docker run -it -p9307:9307 --name test --rm --entrypoint /bin/bash semdockerizing_sphinx:latest
 
+# статистика по запущенным контейнерам
+sudo docker stats $(sudo docker ps --format={{.Names}})
 
+# запуск шела в run команде
+docker run -d alpine /bin/sh -c "while true; do echo hello world; sleep 1; done" - вывод в консоль, как пример логирования
 
 
 
