@@ -185,6 +185,9 @@ sudo docker stats $(sudo docker ps --format={{.Names}})
 # запуск шела в run команде
 docker run -d alpine /bin/sh -c "while true; do echo hello world; sleep 1; done" - вывод в консоль, как пример логирования
 
+# просмотреть все слои в докер-имеже
+docker history iozol/ci-test
+
 
 
 
