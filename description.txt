@@ -188,6 +188,7 @@ docker run -d alpine /bin/sh -c "while true; do echo hello world; sleep 1; done"
 # просмотреть все слои в докер-имеже
 docker history iozol/ci-test
 
-
+# отключить дефолтный entrypoin
+docker run -it --name cassandra --entrypoint /bin/sh -p 9042:9042 iozol/cassandra:3.11.0
 
 
