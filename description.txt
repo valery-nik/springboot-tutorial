@@ -105,6 +105,7 @@ http://blog.arungupta.me/docker-machine-swarm-compose-couchbase-wildfly/
 http://wiki.russianfedora.pro/index.php?title=Docker#Docker-engine
 https://habrahabr.ru/company/infobox/blog/263001/ - алгоритм работы с Docker Compose
 https://toster.ru/q/200627 - Как правильно использовать Docker для веб разработки?
+https://toster.ru/q/348228 - Как правильно делать deploy с помощью docker registry? (docker-compose.yml для prod и dev)
 
 Чеклист для деплоя микросеврисов:
 - создаем мавен мультимодульный проект
