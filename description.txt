@@ -195,3 +195,9 @@ docker run -it --name cassandra --entrypoint /bin/sh -p 9042:9042 iozol/cassandr
 # вывод 1000 последних строк логов совмещенных с stdin и error потоками + grep 
 docker logs --tail 1000 -f <container_id> 2>&1 | grep discovery
 
+#
+docker logs ec8137736f50 2>&1 | grep '^2017-12-14 ' | grep '"STATUS":5..' | tail -10 | cut -d' ' -f1,2 | cut -d'.' -f1 
+
+# 
+docker logs ec8137736f50 2>&1 | sed -n '/^2017-12-14 14:54:0/,/^2017-12-14 14:55/p'
+
