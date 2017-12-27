@@ -201,3 +201,6 @@ docker logs ec8137736f50 2>&1 | grep '^2017-12-14 ' | grep '"STATUS":5..' | tail
 # 
 docker logs ec8137736f50 2>&1 | sed -n '/^2017-12-14 14:54:0/,/^2017-12-14 14:55/p'
 
+# отсоединиться от контейнера в режиме отладки, но не завершить главный процесс
+# https://stackoverflow.com/questions/19688314/how-do-you-attach-and-detach-from-dockers-process
+ctrl + P ctrl + Q
