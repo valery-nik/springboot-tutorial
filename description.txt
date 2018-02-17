@@ -73,6 +73,7 @@ docker-machine env default
 - нужно защитить сокет докер демона сертификатами - https://docs.docker.com/engine/security/https/
 - https://github.com/IcaliaLabs/guides/wiki/Deploy-and-Secure-a-Remote-Docker-Engine
 - https://www.kevinkuszyk.com/2016/11/28/connect-your-docker-client-to-a-remote-docker-host/
+- https://gist.github.com/kekru/4e6d49b4290a4eebc7b597c07eaf61f2
 
 Ссылки:
 http://www.javaworld.com/article/3000781/development-tools/open-source-java-projects-docker.html?page=2
