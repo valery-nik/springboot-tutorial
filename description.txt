@@ -1,4 +1,4 @@
-boot2docker - легковесный дистрибьютив линукса для запуска докер контейнеров. Запусается из под виртуалбокса.
+boot2docker - легковесный дистрибьютив линукса c установленным внутри docker демоном, т.е. именно на этом демоне будут запускаться докер контейнеры. boot2docker запусается из под виртуалбокса.
 Вообщем, это docker demon(Docker engine) для старых win и osx. http://alexey.detr.us/posts/2015/2015-02-11-first-time-docker/
 
 https://cdn-images-1.medium.com/max/800/0*ByLYki7viX6a-pOI.
