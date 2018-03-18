@@ -2,6 +2,14 @@ https://www.solrac.nl/xml-files-in-logstash/ - парсинг xml
 https://habrahabr.ru/company/flant/blog/336654/
 http://dotsandbrackets.com/processing-logs-logstash-ru/ - логстеш на русском
 
+-- общий вид
+docker run --rm -it \
+-v /docker/logstash.conf:/usr/share/logstash/pipeline/logstash.conf \
+-e ES_HOSTS=http://my.elastic.node:9200 \
+-e ES_USERNAME=elastic \
+-e ES_PASSWORD=mypwd \
+ docker.elastic.co/logstash/logstash:5.3.1
+ 
 -- страрт логстеша
 docker run --rm -it \
  --name logstash \
