@@ -69,6 +69,12 @@ docker-machine - инструмент для быстрого удаленног
 docker-machine ls
 docker-machine env default
 
+docker-machine --debug create \
+ --driver generic --generic-ip-address=monako.dev.eldorado.ru \
+ --generic-ssh-key $HOME/.ssh/id_rsa \
+ --generic-ssh-user=iozol \
+ monako 
+
 Подключение к удаленному ранее установленному докер-хосту
 - нужно защитить сокет докер демона сертификатами - https://docs.docker.com/engine/security/https/
 - https://github.com/IcaliaLabs/guides/wiki/Deploy-and-Secure-a-Remote-Docker-Engine
