@@ -48,7 +48,6 @@ Dockerfile - текстовый файл, содержащий команды(и
 docker build -t <имя_репозитория/имя_образа:тег> <имя_репозитория/имя_образа:тег> -f <путь_к_папке_докер_файла> - сборка докер образа
 Пример: docker build -t iozol/springboot:latest .  --где "." - текущая папка
 
-docker build -f ./src/main/docker/Dockerfile .
 -f - задает путь к докер-фалу
 . - путь к директории, т.е. это означает - включить содержимое текущей директории в buildcontext
 
@@ -68,6 +67,9 @@ docker-machine - инструмент для быстрого удаленног
     через docker-machine. https://habrahabr.ru/post/277699/#comment_8780813, https://www.8host.com/blog/upravlenie-udalyonnymi-xostami-docker-s-pomoshhyu-docker-machine-v-ubuntu-16-04/
 docker-machine ls
 docker-machine env default
+
+// опционально
+sudo yum install -y http://mirror.centos.org/centos/7/extras/x86_64/Packages/container-selinux-2.33-1.git86f33cd.el7.noarch.rpm
 
 docker-machine --debug create \
  --driver generic --generic-ip-address=monako.dev.eldorado.ru \
