@@ -1,0 +1,132 @@
+package ru.oz.vtb;
+
+import ru.oz.vtb.dto.InternalUser;
+import ru.oz.vtb.dto.LdapGroup;
+import ru.oz.vtb.dto.remote.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Created by Igor Ozol
+ * on 17.05.2018.
+ * Eldorado LLC
+ */
+public interface LdapGroupService {
+
+    List<LdapGroup> filterByTemplate(List<LdapGroup> groups);
+
+    List<LdapGroup> filterByBranch(List<LdapGroup> groups);
+
+    LdapGroup getGroupByRoleId(long roleId);
+
+    boolean checkRole(LdapGroup group);
+
+    boolean checkActorRole(LdapGroup group);
+
+    default boolean auth(long uid) {
+        boolean result = false;
+
+        List<LdapGroup> ldapGroups = new ArrayList<>(); // from parsing groups
+
+        ldapGroups = filterByTemplate(ldapGroups);
+        ldapGroups = filterByBranch(ldapGroups);
+
+        InternalUser user = getUserByUid(uid);
+        if (ldapGroups.isEmpty()) {
+            if (user != null) {
+                // блокируем Сотрудников (Official) и Акторов (Actor).
+                return false;
+            } else {
+                return false;
+            }
+        }
+
+        if (user == null) {
+            // не зарегистрирован
+            // создаем новую сущность Внутренний пользователь (InternalUser).
+        } else {
+            // зарегистрирован
+            // обновляем атрибуты сущности Внутренний пользователь.
+        }
+
+
+        List<RoleDto> roles = getRolesByLdapGroup("ldap groups from LDAP hranilishe");
+        // ????? как конвертнуть, что бы здесь были заполнены шаблоны, branchId и userId ?
+        for (LdapGroup group : ldapGroups) {
+            // 1. Проверяем, есть ли в системе Роль (Role), созданная в рамках соответствующего Шаблона.
+            if (group.getRoleId() == 0) {
+                // создаем роль
+            }
+
+            // 2. Определяем, есть ли для пользователя запись в справочнике Сотрудников (Official) и Актор (Actor) в рамках соответствующего Подразделения.
+            OfficialDto officialDto = getOfficialByUserIdAndBranchId();
+            if (officialDto == null) {
+                // создаем для этого official в этом branchId.
+
+            } else {
+               // флаг активности?
+            }
+
+            ActorDto actor = getActorByUserId(user.getId()).stream
+                    .fileter(ActorDto :: branchID);
+            if (actor == null) {
+                // создаем для этого official в этом branchId.
+
+            } else {
+                // снимаем блокировку
+            }
+
+            // 3. Определяем, есть ли для нужного Актора связь с соответствующей Ролью.
+
+        }
+
+        // Анализируем, есть ли сейчас в ДБО для Акторов пользователя связи с Ролями, для которых не пришли группы из LDAP.
+        List<ActorRoleDto> links = getLinks(branchId, userId);
+        //Отфильтровать все линки у которых link.roleId не попадает в ldapGroups
+
+        return result;
+    }
+
+}
+
+interface InternalUserService {
+
+    Optional<InternalUser> getUserByUid(long uid);
+
+    boolean createUser(InternalUser user);
+
+    boolean checkOfficialToUserRef(long userId, long branchId);
+
+    boolean checkActorToUserRef(long userId);
+}
+
+interface AccessConrollService {
+
+    // /ui/admin/templates/{templateId}
+    TemplateDto getTemplateById(long templateId);
+
+    // /ui/admin/branches/roles?groups={список групп, разделенных запятой}
+    List<RoleDto> getRolesByLdapGroup(String groups);
+
+    // /ui/admin/branches/{branchId}/users/{userId}/links
+    ActorRoleDto getLinks(int branchId, int userId);
+
+    // /ui/admin/users/{userId}/actors
+    List<ActorDto> getActorByUserId();
+
+    // /ui/admin/branches/{branchId}/users/{userId}/actors
+    ActorDto createActor(int branchId, int actorId);
+
+    // /ui/admin/actors/{actorId}/ui
+    ActorDto updateActor(ActorDto actor);
+
+
+}
+
+interface OfficialService {
+
+    OfficialDto getOfficialByUserIdAndBranchId();
+
+}
