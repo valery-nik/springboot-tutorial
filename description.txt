@@ -120,6 +120,7 @@ http://wiki.russianfedora.pro/index.php?title=Docker#Docker-engine
 https://habrahabr.ru/company/infobox/blog/263001/ - алгоритм работы с Docker Compose
 https://toster.ru/q/200627 - Как правильно использовать Docker для веб разработки?
 https://toster.ru/q/348228 - Как правильно делать deploy с помощью docker registry? (docker-compose.yml для prod и dev)
+https://severalnines.com/blog/mysql-docker-building-container-image - mysql гуд картинки volumes !!!!
 
 Чеклист для деплоя микросеврисов:
 - создаем мавен мультимодульный проект
